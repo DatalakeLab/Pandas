@@ -32,7 +32,11 @@ def haversine_apply_looping(df):
     df['distance'] = df.apply(lambda row: haversine(40.671, -73.985, row['latitude'], row['longitude']), axis=1)
 
 
-df = pd.read_csv('new_york_hotels.csv', encoding='cp1252')
+df = pd.read_csv('sample_data/new_york_hotels.csv', encoding='cp1252')
 #haversine_crude_looping(df)
 #df['distance'] = haversine_iterrows_looping(df)
-haversine_apply_looping(df)
+#haversine_apply_looping(df)
+# Vectorized implementation of Haversine applied on Pandas series
+#df['distance'] = haversine(40.671, -73.985, df['latitude'], df['longitude'])
+# Vectorized implementation of Haversine applied on NumPy arrays
+df['distance'] = haversine(40.671, -73.985, df['latitude'].values, df['longitude'].values)
